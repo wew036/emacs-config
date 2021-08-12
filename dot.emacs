@@ -52,6 +52,18 @@
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
+;; save the buffer, removing and readding the 'delete-trailing-whitespace function
+;; to 'before-save-hook if it's there
+;(defun save-buffer-no-delete-trailing-whitespace ()
+;  (interactive)
+;  (let ((normally-should-delete-trailing-whitespace (memq 'delete-trailing-whitespace before-save-hook)))
+;    (when normally-should-delete-trailing-whitespace
+;      (remove-hook 'before-save-hook 'delete-trailing-whitespace))
+;    (save-buffer)
+;    (when normally-should-delete-trailing-whitespace
+;      (add-hook 'before-save-hook 'delete-trailing-whitespace))))
+;(global-set-key (kbd "C-c C-s") 'save-buffer-no-delete-trailing-whitespace)
+
 (add-hook 'python-mode-hook
           (lambda ()
             (setq-default indent-tabs-mode nil)
@@ -75,11 +87,11 @@ prefer for `sh-mode'.  It is automatically added to
 (add-hook 'sh-mode-hook 'my-setup-sh-mode)
 
 (defun my-c-mode-common-hook ()
-  (setq tab-width 2)
+  (setq tab-width 3)
   (c-set-style "bsd")
   ;(setq indent-tabs-mode t)
   (setq indent-tabs-mode nil)
-  (setq c-basic-offset 2)
+  (setq c-basic-offset 3)
 
   ;; add a function menu
   (imenu-add-to-menubar
@@ -91,7 +103,7 @@ prefer for `sh-mode'.  It is automatically added to
 
 ;; Instruct emacs how to layout source
 (c-add-style "vmware"
-     '((c-basic-offset . 2)
+     '((c-basic-offset . 3)
       (c-comment-only-line-offset . 0)
       (c-hanging-braces-alist . ((substatement-open before after)))
       (c-offsets-alist . ((topmost-intro        . 0)
@@ -206,7 +218,7 @@ prefer for `sh-mode'.  It is automatically added to
  '(default-input-method "latin-1-prefix")
  '(display-time-mode t)
  '(global-font-lock-mode t nil (font-lock))
- '(package-selected-packages '(undo-fu markdown-mode go-mode))
+ '(package-selected-packages '(boogie-friends undo-fu markdown-mode go-mode))
  '(pc-selection-mode t)
  '(safe-local-variable-values
    '((TeX-master . "hierarchical-storage.tex")
